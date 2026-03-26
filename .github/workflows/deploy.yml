@@ -19,8 +19,7 @@ jobs:
           cd backend
           docker stop backend || true
           docker rm backend || true
-          docker build -t backend .
-          docker run -d -p 4000:4000 --env-file .env --name backend --restart always backend
+          docker build -t backend .docker run -d -p 4000:4000 --env-file ~/Canteen-Appliction1/backend/.env --name backend --restart always backend
 
       # FRONTEND
       - name: Deploy Frontend
