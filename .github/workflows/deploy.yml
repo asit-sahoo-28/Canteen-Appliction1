@@ -15,12 +15,17 @@ jobs:
 
       # BACKEND
       - name: Deploy Backend
-        run: |
-          cd backend
-          docker stop backend || true
-          docker rm backend || true
-          docker build -t backend .docker run -d -p 4000:4000 --env-file ~/Canteen-Appliction1/backend/.env --name backend --restart always backend
+  run: |
+    cd backend
+    docker stop backend || true
+    docker rm backend || true
+    docker build -t backend .
+    docker run -d -p 4000:4000 \
+      --env-file /home/ubuntu/Canteen-Appliction1/backend/.env \
+      --name backend \
+      --restart always backend
 
+      
       # FRONTEND
       - name: Deploy Frontend
         run: |
