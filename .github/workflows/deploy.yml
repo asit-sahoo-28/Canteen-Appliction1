@@ -61,13 +61,13 @@
 
 
 
-
 name: Deploy Project
 
 on:
   push:
     branches:
       - main
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -77,10 +77,17 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Show files (debug)
-        run: ls -la
+      - name: Show project structure
+        run: |
+          pwd
+          ls -la
 
-      # BACKEND
+      - name: Clean Docker (prevent disk full)
+        run: |
+          docker system prune -af || true
+          docker builder prune -af || true
+
+      # ---------------- BACKEND ----------------
       - name: Deploy Backend
         run: |
           cd backend
@@ -92,7 +99,7 @@ jobs:
             --name backend \
             --restart always backend
 
-      # FRONTEND
+      # ---------------- FRONTEND ----------------
       - name: Deploy Frontend
         run: |
           cd frontend
@@ -103,7 +110,7 @@ jobs:
             --name frontend \
             --restart always frontend
 
-      # ADMIN
+      # ---------------- ADMIN ----------------
       - name: Deploy Admin
         run: |
           cd admin
