@@ -1,7 +1,7 @@
 import express from "express";
 import { addFood, listFood, removeFood,toggleAvailability,toggleFlashSale } from "../controllers/foodController.js";
 import upload from "../middlewares/upload.js";
-
+import { generateProductDescription } from "../controllers/foodController.js";
 
 
 const foodRouter = express.Router();
@@ -13,6 +13,8 @@ foodRouter.post("/toggle-availability", toggleAvailability);
 foodRouter.post("/toggle-flashsale", toggleFlashSale);
 
 
+
+foodRouter.post("/ai-description", generateProductDescription);
 
 
 
