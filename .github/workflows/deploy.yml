@@ -62,8 +62,6 @@
 
 
 
-
-
 name: Deploy Project
 
 on:
@@ -73,11 +71,14 @@ on:
 
 jobs:
   deploy:
-    runs-on: self-hosted
+    runs-on: [self-hosted, Linux, X64]
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
+
+      - name: Show files (debug)
+        run: ls -la
 
       # BACKEND
       - name: Deploy Backend
